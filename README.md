@@ -11,7 +11,7 @@ Meno is a local, harness-independent verification state layer. Existing tools pr
 ## Quick start
 
 ```bash
-cargo install --path crates/meno-cli
+curl -fsSL https://boringinfra.company/meno/install.sh | sh
 meno init
 meno verify
 meno status

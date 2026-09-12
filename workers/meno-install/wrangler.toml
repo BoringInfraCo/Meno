@@ -1,0 +1,10 @@
+name = "meno-install"
+main = "src/worker.ts"
+compatibility_date = "2026-09-01"
+
+# Inline install.sh as a text module (mirrors combie-install).
+rules = [{ type = "Text", globs = ["**/*.sh"] }]
+
+# Route (created once via API, documented here):
+#   boringinfra.company/meno/* -> meno-install
+# Serves: GET /meno/install.sh  (curl -fsSL https://boringinfra.company/meno/install.sh | sh)
