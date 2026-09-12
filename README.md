@@ -66,4 +66,4 @@ cargo test --workspace
 
 ## License
 
-MIT
+Apache-2.0
