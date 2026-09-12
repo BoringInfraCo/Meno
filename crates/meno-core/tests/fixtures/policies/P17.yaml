@@ -1,0 +1,7 @@
+id: P17
+version: 1
+claim: C17
+requires: []
+contradicted_by: []
+freshness:
+  subject_match: exact

@@ -1,0 +1,33 @@
+{
+  "suites": [
+    {
+      "title": "signup.spec.ts",
+      "file": "signup.spec.ts",
+      "specs": [
+        {
+          "title": "invalid user is rejected",
+          "file": "signup.spec.ts",
+          "ok": false,
+          "tests": [
+            {
+              "projectName": "chromium",
+              "results": [
+                {
+                  "status": "failed",
+                  "duration": 800,
+                  "url": "https://example.test/signup",
+                  "error": {
+                    "message": "expect(page).toHaveURL('/welcome') failed"
+                  },
+                  "attachments": [
+                    { "name": "screenshot", "path": "test-results/fail.png", "contentType": "image/png" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+[package]
+name = "meno-adapters"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Adapter contract and source collectors (git, command, junit, playwright, generic)"
+
+[lints]
+workspace = true
+
+[dependencies]
+hex.workspace = true
+meno-core.workspace = true
+quick-xml.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+time.workspace = true
+
+[dev-dependencies]
+tempfile.workspace = true

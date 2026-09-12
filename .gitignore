@@ -1,0 +1,12 @@
+/target/
+**/*.rs.bk
+.meno/
+.DS_Store
+*.swp
+*.swo
+.idea/
+.vscode/
+.env
+.env.*
+!*.env.example
+docs/internal/

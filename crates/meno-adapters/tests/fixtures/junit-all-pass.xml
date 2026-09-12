@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="all-pass" tests="2" failures="0" errors="0" skipped="0" time="0.030">
+  <testsuite name="math.AddTest" tests="2" failures="0" errors="0" skipped="0" time="0.030">
+    <testcase name="adds_numbers" classname="math.AddTest" time="0.010"/>
+    <testcase name="subtracts_numbers" classname="math.AddTest" time="0.020"/>
+  </testsuite>
+</testsuites>

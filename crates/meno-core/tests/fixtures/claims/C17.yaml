@@ -1,0 +1,16 @@
+id: C17
+statement: "A valid user can create an account on mobile."
+state: draft
+origin:
+  kind: human
+policy:
+  version: 1
+  requires:
+    - kind: command.result
+      match:
+        exit_code: 0
+      min_count: 1
+      subject_bound: true
+  contradicted_by: []
+  freshness:
+    subject_match: exact

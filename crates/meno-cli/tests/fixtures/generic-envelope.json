@@ -1,0 +1,28 @@
+{
+  "id": "01ARZ3NDEKTSV4RRFFQ69G5FAV",
+  "kind": "generic.envelope",
+  "subject_id": "",
+  "source": {
+    "name": "fixture"
+  },
+  "observations": [
+    {
+      "type": "generic.note",
+      "fields": {
+        "ok": true
+      }
+    }
+  ],
+  "artifact_refs": [],
+  "captured_at": "2024-01-02T03:04:05Z",
+  "provenance": {
+    "producer": "test.generic"
+  },
+  "trust": {
+    "origin": "machine",
+    "reproducible": true,
+    "basis": "observed",
+    "relation": "direct"
+  },
+  "source_metadata": {}
+}

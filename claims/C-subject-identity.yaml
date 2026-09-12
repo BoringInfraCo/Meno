@@ -1,0 +1,17 @@
+id: C-subject-identity
+statement: "Subject identity is a deterministic SHA-256 of the canonical Git work-tree snapshot (meno-subject-v1)."
+state: frozen
+origin:
+  kind: human
+  source: docs/specs/01-subject-identity.md
+policy:
+  version: 1
+  requires:
+    - kind: command.result
+      match:
+        exit_code: 0
+      min_count: 1
+      subject_bound: true
+  contradicted_by: []
+  freshness:
+    subject_match: exact

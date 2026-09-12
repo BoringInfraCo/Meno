@@ -1,0 +1,32 @@
+[package]
+name = "meno"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+description = "Meno CLI — verification state layer"
+
+[lints]
+workspace = true
+
+[[bin]]
+name = "meno"
+path = "src/main.rs"
+
+[dependencies]
+clap.workspace = true
+meno-adapters.workspace = true
+meno-core.workspace = true
+meno-mcp.workspace = true
+meno-store.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_yaml.workspace = true
+thiserror.workspace = true
+time.workspace = true
+toml.workspace = true
+toml_edit.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true
+tempfile.workspace = true

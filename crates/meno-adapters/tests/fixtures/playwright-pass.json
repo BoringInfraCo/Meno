@@ -1,0 +1,31 @@
+{
+  "suites": [
+    {
+      "title": "signup.spec.ts",
+      "file": "signup.spec.ts",
+      "specs": [
+        {
+          "title": "valid user can sign up",
+          "file": "signup.spec.ts",
+          "ok": true,
+          "tests": [
+            {
+              "projectName": "chromium",
+              "results": [
+                {
+                  "status": "passed",
+                  "duration": 1200,
+                  "url": "https://example.test/welcome",
+                  "attachments": [
+                    { "name": "screenshot", "path": "test-results/shot.png", "contentType": "image/png" },
+                    { "name": "trace", "path": "test-results/trace.zip", "contentType": "application/zip" }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

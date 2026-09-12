@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="demo.MixedTest" tests="4" failures="1" errors="1" skipped="1" time="0.060">
+  <testcase name="passes" classname="demo.MixedTest" time="0.010"/>
+  <testcase name="fails" classname="demo.MixedTest" time="0.020">
+    <failure message="assertion failed" type="AssertionError">expected true but was false</failure>
+  </testcase>
+  <testcase name="errors" classname="demo.MixedTest" time="0.030">
+    <error message="boom" type="RuntimeError">traceback</error>
+  </testcase>
+  <testcase name="skipped" classname="demo.MixedTest" time="0.000">
+    <skipped message="not ready"/>
+  </testcase>
+</testsuite>

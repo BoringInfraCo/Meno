@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="mixed" tests="4" failures="1" errors="1" skipped="1" time="0.06">
+  <testcase classname="suite.A" name="passes" time="0.01"/>
+  <testcase classname="suite.A" name="fails" time="0.02">
+    <failure message="assertion failed: expected 1 got 2 and then a lot of extra diagnostic context that should be truncated in inspect output because it is very long">stack</failure>
+  </testcase>
+  <testcase classname="suite.B" name="errors" time="0.03">
+    <error message="boom">error details</error>
+  </testcase>
+  <testcase classname="suite.B" name="skips" time="0.00">
+    <skipped message="not now"/>
+  </testcase>
+</testsuite>

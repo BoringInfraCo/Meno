@@ -1,0 +1,7 @@
+id: C-invalid
+statement: "runtime evidence must not appear in claim files"
+state: draft
+origin:
+  kind: human
+policy_ref: P17
+evidence: []
