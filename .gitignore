@@ -10,3 +10,5 @@
 .env.*
 !*.env.example
 docs/internal/
+__pycache__/
+*.pyc
