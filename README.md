@@ -1,69 +1,69 @@
 # Meno
+**Bind evidence to the exact software state it observed.**
 
-Meno is a local, harness-independent **verification state layer**. Existing tools produce evidence; Meno binds that evidence to the exact software state it observed, preserves provenance, and evaluates deterministic `proven` / `disproven` / `unknown` verdicts. It owns verification **state**, not execution: it does not run your test suite, drive a browser, or replace CI.
+Meno is a local, harness-independent verification state layer. Existing tools produce evidence; Meno binds that evidence to a subject hash, preserves provenance, and evaluates `proven` / `disproven` / `unknown`. It owns state, not execution.
 
-> This claim was established by this evidence against this exact software state. The state changed, so the old evidence no longer proves it.
+- All commands accept `--json` for humans and agents alike.
 
-## Status
+[Specs](docs/specs/) · [Skill](skills/meno/SKILL.md) · [Examples](examples/)
 
-**v1.0 local freeze** (crate version `1.0.0`). Frozen contracts live in [`docs/specs/`](docs/specs/). Adapter authors should implement against those specs, not CLI internals.
-
-## Commands
-
-Five top-level commands. There is no sixth.
-
-| Command | Role |
-|---|---|
-| `meno init` | Initialize Meno in a Git work tree |
-| `meno connect` | Discover and configure adapters, including agents |
-| `meno verify` | Collect safe evidence and evaluate claims |
-| `meno status` | Fast verification summary; never launches tools |
-| `meno inspect` | Explain a claim, record human confirmation, or export a bundle |
-
+---
 ## Quick start
 
 ```bash
 cargo install --path crates/meno-cli
 meno init
+meno verify
+meno status
 ```
 
-Or without installing:
-
-```bash
-cargo run -p meno -- init
+```text
+claim  C-subject-identity  proven    subject 9f3a…c1
+claim  C17                 unknown   no evidence for current subject
 ```
 
-Machine-readable state:
+---
+## Commands
 
-```bash
-meno status --json
-meno inspect --export ./bundle
-```
+Five commands. No sixth.
 
-Agent (MCP + Skill; not a sixth command):
+| Command | Description |
+|---|---|
+| `meno init` | Initialize Meno in a Git work tree |
+| `meno connect` | Discover and configure adapters |
+| `meno verify` | Collect evidence and evaluate claims |
+| `meno status` | Fast summary; never launches tools |
+| `meno inspect` | Explain a claim or export a bundle |
+
+Agent over MCP (not a sixth command):
 
 ```bash
 meno connect --adapter agent --write
 meno connect --adapter agent --stdio
 ```
 
-## Layout
+---
+## How it works
 
-```text
-crates/meno-core        # pure domain: subject, policy, envelopes, verdicts
-crates/meno-store       # SQLite + content-addressed artifacts + bundle
-crates/meno-adapters    # adapter contract; git, command, junit, playwright, human
-crates/meno-cli         # `meno` binary (five-command ceiling)
-crates/meno-mcp         # MCP tools; served via `meno connect --adapter agent --stdio`
-docs/specs/             # frozen implementation contracts
-skills/meno/SKILL.md    # Skill behavioral contract
-spec/reference/         # independent Python subject hasher
+1. Adapters collect evidence (`git`, `command`, `junit`, `playwright`, `human`).
+2. Meno binds evidence to the current subject hash.
+3. Claims evaluate to `proven` / `disproven` / `unknown`.
+4. `status` summarizes, `inspect` explains.
+
+---
+## Status
+
+**v1.0 local freeze.** Frozen contracts live in [`docs/specs/`](docs/specs/). Adapter authors should build against those specs, not CLI internals.
+
+---
+## Development
+
+```bash
+cargo fmt --all -- --check
+cargo clippy --workspace --all-targets -- -D warnings
+cargo test --workspace
 ```
 
-## Specs
+## License
 
-Adapter-author index: [`docs/specs/`](docs/specs/).
-
-## Non-goals
-
-Meno is **not a test runner**, **not a browser**, and **does not issue LLM verdicts**. Tools observe; humans confirm; Meno evaluates.
+MIT
