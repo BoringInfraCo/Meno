@@ -1,13 +1,18 @@
 # Meno
+
 **Bind evidence to the exact software state it observed.**
 
-Meno is a local, harness-independent verification state layer. Existing tools produce evidence; Meno binds that evidence to a subject hash, preserves provenance, and evaluates `proven` / `disproven` / `unknown`. It owns state, not execution.
+Meno is a local, harness-independent verification state layer. Existing tools produce evidence — tests, commands, artifacts; Meno binds that evidence to a subject hash, preserves provenance, and evaluates each claim as `proven` / `disproven` / `unknown`. It owns state, not execution.
 
-- All commands accept `--json` for humans and agents alike.
+- **Bind evidence** — every record is tied to the current Git work-tree subject hash
+- **Evaluate claims** — policy files declare requires / contradicted-by / freshness per claim
+- **Inspect fast** — `status` summarizes without launching tools; `inspect` explains why
+- **Stay local** — SQLite store, no network calls; bundles export state only when you choose to share
 
-[Specs](docs/specs/) · [Skill](skills/meno/SKILL.md) · [Examples](examples/)
+All commands accept `--json` for machine-readable output, built for humans and agents alike.
 
 ---
+
 ## Quick start
 
 ```bash
@@ -17,45 +22,75 @@ meno verify
 meno status
 ```
 
-```text
-claim  C-subject-identity  proven    subject 9f3a…c1
-claim  C17                 unknown   no evidence for current subject
-```
+`status` never launches tools; `inspect` explains a single claim or exports a portable bundle. See [docs/specs/](docs/specs/) for the frozen v1 contracts.
 
 ---
+
 ## Commands
 
-Five commands. No sixth.
-
 | Command | Description |
-|---|---|
+| --- | --- |
 | `meno init` | Initialize Meno in a Git work tree |
-| `meno connect` | Discover and configure adapters |
-| `meno verify` | Collect evidence and evaluate claims |
+| `meno connect` | Discover and configure adapters (`--adapter agent --stdio` for MCP) |
+| `meno verify` | Collect evidence and evaluate claims against the current subject |
 | `meno status` | Fast summary; never launches tools |
-| `meno inspect` | Explain a claim or export a bundle |
+| `meno inspect` | Explain a claim or export a portable bundle |
 
-Agent over MCP (not a sixth command):
+Five commands. No sixth — the agent connects over MCP, not a new subcommand.
+
+---
+
+## Installation
+
+Requires Rust **1.80 or newer** (`rust-version` in `Cargo.toml`).
 
 ```bash
-meno connect --adapter agent --write
-meno connect --adapter agent --stdio
+curl -fsSL https://boringinfra.company/meno/install.sh | sh
+```
+
+Or build from source:
+
+```bash
+cargo build --release
+cargo test --workspace
 ```
 
 ---
-## How it works
 
-1. Adapters collect evidence (`git`, `command`, `junit`, `playwright`, `human`).
-2. Meno binds evidence to the current subject hash.
-3. Claims evaluate to `proven` / `disproven` / `unknown`.
-4. `status` summarizes, `inspect` explains.
+## Adapters
+
+| Adapter | Collects | Status |
+| --- | --- | --- |
+| git | Work-tree subject hash | ✅ Supported |
+| command | Exit codes bound to the subject | ✅ Supported |
+| junit | Test-suite results (XML) | ✅ Supported |
+| playwright | Browser evidence | ✅ Supported |
+| human | Signed attestations | ✅ Supported |
+| agent | MCP stdio bridge | ✅ Supported |
+
+Run `meno connect` to discover and configure adapters. Adapter authors build against [`docs/specs/`](docs/specs/), not CLI internals.
 
 ---
-## Status
 
-**v1.0 local freeze.** Frozen contracts live in [`docs/specs/`](docs/specs/). Adapter authors should build against those specs, not CLI internals.
+## Limitations
+
+- **State, not execution.** Meno never runs your tools on `status`; `verify` only collects via configured adapters.
+- **Subject-bound.** Evidence counts only for the subject hash it observed; move the tree, re-verify.
+- **Three verdicts.** Claims evaluate to `proven` / `disproven` / `unknown` — unknown means no evidence, not failure.
+- **Local first.** SQLite store under `.meno/`; sharing happens only through explicit bundle export.
+- **Frozen v1.** Adapter, envelope, and JSON contracts are frozen; breaking changes require a new spec version.
 
 ---
+
+## Docs
+
+- [docs/specs/](docs/specs/) — frozen v1 contracts (claims, subjects, envelopes, schema, MCP)
+- [skills/meno/SKILL.md](skills/meno/SKILL.md) — behavioral contract for agents
+- [examples/](examples/) — generic envelope examples
+- [claims/](claims/) — policy files evaluated against the current subject
+
+---
+
 ## Development
 
 ```bash
@@ -66,4 +101,4 @@ cargo test --workspace
 
 ## License
 
-Apache-2.0
+Apache-2.0 — see [LICENSE](LICENSE).
